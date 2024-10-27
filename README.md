@@ -1,1 +1,1 @@
-curl static binary
+tar, xz and gzip static binary
