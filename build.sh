@@ -8,8 +8,8 @@ mkdir output
 git clone https://git.savannah.gnu.org/git/gzip
 cd gzip
 ./bootstrap
-./configure LDFLAGS="-static" --enable-static --disable-shared
-make -j8 LDFLAGS="--static"
+./configure LDFLAGS="-static -Wl,--gc-sections -ffunction-sections -fdata-sections" --enable-static --disable-shared
+make -j8 LDFLAGS="--static -Wl,--gc-sections -ffunction-sections -fdata-sections"
 strip gzip
 upx gzip
 cp gzip ../output/
@@ -21,8 +21,8 @@ git clone https://github.com/xz-mirror/xz
 cd xz
 autoreconf -fi
 ./autogen.sh
-./configure LDFLAGS="-static" --enable-static --disable-shared
-make -j8 LDFLAGS="--static"
+./configure LDFLAGS="-static -Wl,--gc-sections -ffunction-sections -fdata-sections" --enable-static --disable-shared
+make -j8 LDFLAGS="--static -Wl,--gc-sections -ffunction-sections -fdata-sections"
 strip src/xz/xz
 upx src/xz/xz
 cp src/xz/xz ../output/
@@ -33,8 +33,8 @@ cd ..
 git clone https://git.savannah.gnu.org/git/tar
 cd tar
 ./bootstrap
-FORCE_UNSAFE_CONFIGURE=1 ./configure LDFLAGS="-static" --enable-static --disable-shared --with-gzip=gzip --with-xz=xz
-make -j8 LDFLAGS="--static"
+FORCE_UNSAFE_CONFIGURE=1 ./configure LDFLAGS="-static -Wl,--gc-sections -ffunction-sections -fdata-sections" --enable-static --disable-shared --with-gzip=gzip --with-xz=xz
+make -j8 LDFLAGS="--static -Wl,--gc-sections -ffunction-sections -fdata-sections"
 strip src/tar
 upx src/tar
 cp src/tar ../output/
